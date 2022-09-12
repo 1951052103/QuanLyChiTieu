@@ -85,7 +85,7 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.Common.BLL
             return null;
         }
 
-        public virtual SingleRsp Get(int id)
+        public virtual SingleRsp Get(Dictionary<string, string> paramList)
         {
             return null;
         }

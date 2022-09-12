@@ -60,7 +60,7 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.Common.DAL
             return null;
         }
 
-        public virtual List<T> Get(int id)
+        public virtual List<T> Get(Dictionary<string, string> paramList)
         {
             return null;
         }

@@ -43,7 +43,7 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.Common.DAL
         /// <returns>Return the object</returns>
         T Read(string code);
 
-        List<T> Get(int id);
+        List<T> Get(Dictionary<string, string> paramList);
 
         /// <summary>
         /// Update the model

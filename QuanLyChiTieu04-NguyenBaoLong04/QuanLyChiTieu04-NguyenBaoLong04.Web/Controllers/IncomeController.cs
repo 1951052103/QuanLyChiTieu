@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using QuanLyChiTieu04_NguyenBaoLong04.BLL;
 using QuanLyChiTieu04_NguyenBaoLong04.Common.Reg;
 using QuanLyChiTieu04_NguyenBaoLong04.Common.Rsp;
+using System.Collections.Generic;
 
 namespace QuanLyChiTieu04_NguyenBaoLong04.Web.Controllers
 {
@@ -16,11 +17,27 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.Web.Controllers
             incomeSvc = new IncomeSvc();
 
         }
-        [HttpGet("/{userId}")]
-        public IActionResult GetIncomeByUserId(int userId) //[FromBody] SimpleReq simpleReq
+        
+        [HttpGet("/income/{userId}")]
+        public IActionResult GetIncomeByUserId(int userId,
+             [FromQuery(Name = "date")] string date,
+             [FromQuery(Name = "reason")] string reason) //[FromBody] SimpleReq simpleReq
+        {
+            Dictionary<string, string> paramList = new Dictionary<string, string>();
+            paramList.Add("userId", userId.ToString());
+            paramList.Add("date", date);
+            paramList.Add("reason", reason);
+
+            var res = new SingleRsp();
+            res = incomeSvc.Get(paramList);
+            return Ok(res);
+        }
+
+        [HttpDelete("/income/{incomeId}/delete")]
+        public IActionResult DeleteIncomeById(int incomeId)
         {
             var res = new SingleRsp();
-            res = incomeSvc.Get(userId);
+            res = incomeSvc.Delete(incomeId);
             return Ok(res);
         }
     }

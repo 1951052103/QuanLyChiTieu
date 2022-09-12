@@ -16,10 +16,17 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.BLL
             incomeRep = new IncomeRep();
         }
 
-        public override SingleRsp Get(int userId)
+        public override SingleRsp Get(Dictionary<string, string> paramList)
         {
             var res = new SingleRsp();
-            res.Data = _rep.Get(userId);
+            res.Data = _rep.Get(paramList);
+            return res;
+        }
+
+        public override SingleRsp Delete(int incomeId)
+        {
+            var res = new SingleRsp();
+            res.Data = _rep.Delete(incomeId);
             return res;
         }
     }

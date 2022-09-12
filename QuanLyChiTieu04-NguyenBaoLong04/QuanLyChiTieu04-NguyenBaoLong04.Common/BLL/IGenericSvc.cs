@@ -47,7 +47,7 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.Common.BLL
         /// <returns>Return the object</returns>
         SingleRsp Read(string code);
 
-        SingleRsp Get(int id);
+        SingleRsp Get(Dictionary<string, string> paramList);
 
         /// <summary>
         /// Update the model
