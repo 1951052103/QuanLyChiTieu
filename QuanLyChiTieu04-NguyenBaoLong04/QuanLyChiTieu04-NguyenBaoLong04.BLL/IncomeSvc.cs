@@ -22,12 +22,5 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.BLL
             res.Data = _rep.Get(paramList);
             return res;
         }
-
-        public override SingleRsp Delete(int incomeId)
-        {
-            var res = new SingleRsp();
-            res.Data = _rep.Delete(incomeId);
-            return res;
-        }
     }
 }

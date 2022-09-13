@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using QuanLyChiTieu04_NguyenBaoLong04.Common.Rsp;
 
 namespace QuanLyChiTieu04_NguyenBaoLong04.DAL
 {
@@ -37,18 +38,6 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.DAL
             }
 
             return res.ToList();
-        }
-
-        public IncomeAndExpense Delete(int incomeId)
-        {
-            var income = base.All.First(i => i.Id == incomeId);
-            
-            using (var context = new QuanLyChiTieuContext())
-            {
-                context.IncomeAndExpenses.Remove(income);
-                context.SaveChanges();
-            }
-            return income;
         }
     }
 }

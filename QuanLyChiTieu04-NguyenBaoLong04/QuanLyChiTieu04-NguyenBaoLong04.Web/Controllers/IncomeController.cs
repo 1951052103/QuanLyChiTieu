@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using QuanLyChiTieu04_NguyenBaoLong04.BLL;
 using QuanLyChiTieu04_NguyenBaoLong04.Common.Reg;
 using QuanLyChiTieu04_NguyenBaoLong04.Common.Rsp;
+using QuanLyChiTieu04_NguyenBaoLong04.DAL.Models;
 using System.Collections.Generic;
 
 namespace QuanLyChiTieu04_NguyenBaoLong04.Web.Controllers
@@ -30,14 +31,6 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.Web.Controllers
 
             var res = new SingleRsp();
             res = incomeSvc.Get(paramList);
-            return Ok(res);
-        }
-
-        [HttpDelete("/income/{incomeId}/delete")]
-        public IActionResult DeleteIncomeById(int incomeId)
-        {
-            var res = new SingleRsp();
-            res = incomeSvc.Delete(incomeId);
             return Ok(res);
         }
     }
