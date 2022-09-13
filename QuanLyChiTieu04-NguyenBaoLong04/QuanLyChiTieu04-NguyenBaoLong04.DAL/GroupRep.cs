@@ -58,6 +58,7 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.DAL
                         context.Groups.Remove(item);
                         context.SaveChanges();
                         tran.Commit();
+                        res.Data = id;
                     }
                     catch (Exception ex)
                     {
@@ -82,6 +83,31 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.DAL
                         context.Groups.Add(item);
                         context.SaveChanges();
                         tran.Commit();
+                        res.Data = item;
+                    }
+                    catch (Exception ex)
+                    {
+                        tran.Rollback();
+                        res.SetError(ex.StackTrace);
+                    }
+                }
+            }
+            return res;
+        }
+
+        public SingleRsp UpdateGroup(Group item)
+        {
+            var res = new SingleRsp();
+            using (var context = new QuanLyChiTieuContext())
+            {
+                using (var tran = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        context.Groups.Update(item);
+                        context.SaveChanges();
+                        tran.Commit();
+                        res.Data = item;
                     }
                     catch (Exception ex)
                     {

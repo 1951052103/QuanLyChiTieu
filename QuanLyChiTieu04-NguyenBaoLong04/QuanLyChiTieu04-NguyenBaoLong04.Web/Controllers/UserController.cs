@@ -38,5 +38,12 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.Web.Controllers
             var res = userSvc.Login(userReq);
             return Ok(res);
         }
+
+        [HttpPut("/user/update")]
+        public IActionResult UpdateUser([FromBody] User user)
+        {
+            var res = userSvc.UpdateUser(user);
+            return Ok(res);
+        }
     }
 }

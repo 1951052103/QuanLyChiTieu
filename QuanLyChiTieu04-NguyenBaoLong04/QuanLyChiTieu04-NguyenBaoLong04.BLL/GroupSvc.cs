@@ -36,5 +36,13 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.BLL
             res = groupRep.Add(item);
             return res;
         }
+
+        public SingleRsp UpdateGroup(Group item)
+        {
+            var res = new SingleRsp();
+            res = groupRep.UpdateGroup(item);
+
+            return res;
+        }
     }
 }

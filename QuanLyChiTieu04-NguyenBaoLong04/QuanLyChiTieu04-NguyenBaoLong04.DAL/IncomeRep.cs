@@ -61,14 +61,38 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.DAL
             {
                 int userId = Int32.Parse(paramList["userId"]);
                 int month = Int32.Parse(paramList["month"]);
+                int year = Int32.Parse(paramList["year"]);
 
-                var res = All.Where(e => e.Active == true)
-                    .Where(e => e.IsIncome == true)
-                    .Where(e => e.UserId == userId)
-                    .Where(e => e.Date.Value.Month == month)
-                    .Select(e => e.Amount).Sum();
+                var res = All.Where(i => i.Active == true)
+                    .Where(i => i.IsIncome == true)
+                    .Where(i => i.UserId == userId)
+                    .Where(i => i.Date.Value.Month == month)
+                    .Where(i => i.Date.Value.Year == year)
+                    .Select(i => i.Amount).Sum();
 
                 return (decimal)res;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public dynamic GetIncomeStatByYear(Dictionary<string, string> paramList)
+        {
+            try
+            {
+                int userId = Int32.Parse(paramList["userId"]);
+                int year = Int32.Parse(paramList["year"]);
+
+                var res = All.Where(i => i.Active == true)
+                    .Where(i => i.IsIncome == true)
+                    .Where(i => i.UserId == userId)
+                    .Where(i => i.Date.Value.Year == year)
+                    .GroupBy(i => i.Date.Value.Month)
+                    .Select(i => new { Month = i.Key, TotalAmount = i.Sum(i1 => i1.Amount) });
+
+                return res;
             }
             catch (Exception)
             {

@@ -4,6 +4,7 @@ using QuanLyChiTieu04_NguyenBaoLong04.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace QuanLyChiTieu04_NguyenBaoLong04.DAL
@@ -13,6 +14,15 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.DAL
         public UserRep()
         {
 
+        }
+
+        private static string Hash(string password)
+        {
+            var sha = SHA256.Create();
+            var asByteArray = Encoding.Default.GetBytes(password);
+            var hashedPassword = sha.ComputeHash(asByteArray);
+
+            return Convert.ToBase64String(hashedPassword);
         }
 
         public SingleRsp Delete(int id)
@@ -29,6 +39,7 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.DAL
                         context.Users.Remove(item);
                         context.SaveChanges();
                         tran.Commit();
+                        res.Data = id;
                     }
                     catch (Exception ex)
                     {
@@ -50,9 +61,12 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.DAL
                 {
                     try
                     {
+                        item.Pass = Hash(item.Pass);
+
                         context.Users.Add(item);
                         context.SaveChanges();
                         tran.Commit();
+                        res.Data = item;
                     }
                     catch (Exception ex)
                     {
@@ -70,7 +84,7 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.DAL
             try
             {
                 var res = All.Where(u => u.Username == item.Username)
-                        .Where(u => u.Pass == item.Pass);
+                        .Where(u => u.Pass == Hash(item.Pass));
 
                 return res.ToList()[0];
             }
@@ -78,6 +92,32 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.DAL
             {
                 return null;
             }
+        }
+
+        public SingleRsp UpdateUser(User item)
+        {
+            var res = new SingleRsp();
+            using (var context = new QuanLyChiTieuContext())
+            {
+                using (var tran = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        item.Pass = Hash(item.Pass);
+
+                        context.Users.Update(item);
+                        context.SaveChanges();
+                        tran.Commit();
+                        res.Data = item;
+                    }
+                    catch (Exception ex)
+                    {
+                        tran.Rollback();
+                        res.SetError(ex.StackTrace);
+                    }
+                }
+            }
+            return res;
         }
     }
 }

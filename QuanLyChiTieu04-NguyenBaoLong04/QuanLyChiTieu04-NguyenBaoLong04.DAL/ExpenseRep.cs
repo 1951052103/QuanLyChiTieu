@@ -62,14 +62,38 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.DAL
             {
                 int userId = Int32.Parse(paramList["userId"]);
                 int month = Int32.Parse(paramList["month"]);
+                int year = Int32.Parse(paramList["year"]);
 
                 var res = All.Where(e => e.Active == true)
                     .Where(e => e.IsIncome == false)
                     .Where(e => e.UserId == userId)
                     .Where(e => e.Date.Value.Month == month)
+                    .Where(i => i.Date.Value.Year == year)
                     .Select(e => e.Amount).Sum();
 
                 return (decimal)res;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public dynamic GetExpenseStatByYear(Dictionary<string, string> paramList)
+        {
+            try
+            {
+                int userId = Int32.Parse(paramList["userId"]);
+                int year = Int32.Parse(paramList["year"]);
+
+                var res = All.Where(e => e.Active == true)
+                    .Where(e => e.IsIncome == false)
+                    .Where(e => e.UserId == userId)
+                    .Where(e => e.Date.Value.Year == year)
+                    .GroupBy(e => e.Date.Value.Month)
+                    .Select(e => new { Month = e.Key, TotalAmount=e.Sum(e1 => e1.Amount) } );
+
+                return res;
             }
             catch (Exception)
             {

@@ -12,8 +12,8 @@ CREATE TABLE Users (
 );
 
 INSERT INTO Users (Username, Pass, FirstName)
-VALUES ('user', '$2a$10$IMc.iLFc2GlER.1nZT2or.IKqqnSB76N6Y5YRMHtYABYWrnPnExIK', 'user'),
-('admin', '$2a$10$IMc.iLFc2GlER.1nZT2or.IKqqnSB76N6Y5YRMHtYABYWrnPnExIK', 'admin');
+VALUES ('user', 'pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=', 'user'),
+('admin', 'pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=', 'admin');
 
 CREATE TABLE Groups (
 	Id int NOT NULL IDENTITY(1,1) PRIMARY KEY ,

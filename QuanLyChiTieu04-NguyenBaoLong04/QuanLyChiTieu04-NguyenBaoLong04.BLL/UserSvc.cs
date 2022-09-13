@@ -44,5 +44,13 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.BLL
             return res;
 
         }
+
+        public SingleRsp UpdateUser(User item)
+        {
+            var res = new SingleRsp();
+            res = userRep.UpdateUser(item);
+
+            return res;
+        }
     }
 }

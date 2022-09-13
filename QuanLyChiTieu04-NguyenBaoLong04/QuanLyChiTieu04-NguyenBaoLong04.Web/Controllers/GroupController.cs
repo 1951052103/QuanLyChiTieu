@@ -46,5 +46,12 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.Web.Controllers
             var res = groupSvc.Add(item);
             return Ok(res);
         }
+
+        [HttpPut("/group/update")]
+        public IActionResult UpdateGroup([FromBody] Group item)
+        {
+            var res = groupSvc.UpdateGroup(item);
+            return Ok(res);
+        }
     }
 }

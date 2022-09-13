@@ -29,6 +29,7 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.DAL
                         context.GroupsUsers.Remove(item);
                         context.SaveChanges();
                         tran.Commit();
+                        res.Data = id;
                     }
                     catch (Exception ex)
                     {
@@ -53,6 +54,7 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.DAL
                         context.GroupsUsers.Add(item);
                         context.SaveChanges();
                         tran.Commit();
+                        res.Data = item;
                     }
                     catch (Exception ex)
                     {

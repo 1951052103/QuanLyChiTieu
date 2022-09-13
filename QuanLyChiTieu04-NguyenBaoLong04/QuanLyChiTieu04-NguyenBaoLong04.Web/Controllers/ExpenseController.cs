@@ -37,14 +37,29 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.Web.Controllers
 
         [HttpGet("/expense/{userId}/get-total-expense-by-month/")]
         public IActionResult GetTotalExpenseByMonth(int userId,
-             [FromQuery(Name = "month")] string month)
+             [FromQuery(Name = "month")] string month,
+             [FromQuery(Name = "year")] string year)
         {
             Dictionary<string, string> paramList = new Dictionary<string, string>();
             paramList.Add("userId", userId.ToString());
             paramList.Add("month", month);
-            
+            paramList.Add("year", year);
+
             var res = new SingleRsp();
             res = expenseSvc.GetTotalExpenseByMonth(paramList);
+            return Ok(res);
+        }
+
+        [HttpGet("/expense/{userId}/get-expense-stat-by-year/")]
+        public IActionResult GetExpenseStatByYear(int userId,
+             [FromQuery(Name = "year")] string year)
+        {
+            Dictionary<string, string> paramList = new Dictionary<string, string>();
+            paramList.Add("userId", userId.ToString());
+            paramList.Add("year", year);
+
+            var res = new SingleRsp();
+            res = expenseSvc.GetExpenseStatByYear(paramList);
             return Ok(res);
         }
     }

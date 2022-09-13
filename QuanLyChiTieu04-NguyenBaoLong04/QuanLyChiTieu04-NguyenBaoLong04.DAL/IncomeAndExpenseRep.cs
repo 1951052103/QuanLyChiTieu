@@ -29,6 +29,7 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.DAL
                         context.IncomeAndExpenses.Remove(item);
                         context.SaveChanges();
                         tran.Commit();
+                        res.Data = id;
                     }
                     catch (Exception ex)
                     {
@@ -53,6 +54,7 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.DAL
                         context.IncomeAndExpenses.Add(item);
                         context.SaveChanges();
                         tran.Commit();
+                        res.Data = item;
                     }
                     catch (Exception ex)
                     {
@@ -76,7 +78,7 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.DAL
                         context.IncomeAndExpenses.Update(item);
                         context.SaveChanges();
                         tran.Commit();
-                        
+                        res.Data = item;
                     }
                     catch (Exception ex)
                     {

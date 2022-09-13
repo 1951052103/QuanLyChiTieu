@@ -29,5 +29,12 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.BLL
             res.Data = _rep.GetTotalExpenseByMonth(paramList);
             return res;
         }
+
+        public SingleRsp GetExpenseStatByYear(Dictionary<string, string> paramList)
+        {
+            var res = new SingleRsp();
+            res.Data = _rep.GetExpenseStatByYear(paramList);
+            return res;
+        }
     }
 }

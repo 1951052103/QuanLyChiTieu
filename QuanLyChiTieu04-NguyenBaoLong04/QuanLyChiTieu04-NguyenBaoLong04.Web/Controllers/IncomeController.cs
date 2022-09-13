@@ -40,14 +40,29 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.Web.Controllers
 
         [HttpGet("/income/{userId}/get-total-income-by-month/")]
         public IActionResult GetTotalIncomeByMonth(int userId,
-             [FromQuery(Name = "month")] string month)
+             [FromQuery(Name = "month")] string month,
+             [FromQuery(Name = "year")] string year)
         {
             Dictionary<string, string> paramList = new Dictionary<string, string>();
             paramList.Add("userId", userId.ToString());
             paramList.Add("month", month);
+            paramList.Add("year", year);
 
             var res = new SingleRsp();
             res = incomeSvc.GetTotalIncomeByMonth(paramList);
+            return Ok(res);
+        }
+
+        [HttpGet("/income/{userId}/get-income-stat-by-year/")]
+        public IActionResult GetIncomeStatByYear(int userId,
+             [FromQuery(Name = "year")] string year)
+        {
+            Dictionary<string, string> paramList = new Dictionary<string, string>();
+            paramList.Add("userId", userId.ToString());
+            paramList.Add("year", year);
+
+            var res = new SingleRsp();
+            res = incomeSvc.GetIncomeStatByYear(paramList);
             return Ok(res);
         }
     }
