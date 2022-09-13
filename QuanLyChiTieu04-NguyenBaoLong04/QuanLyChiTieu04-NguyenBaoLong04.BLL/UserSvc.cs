@@ -52,5 +52,13 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.BLL
 
             return res;
         }
+
+        public SingleRsp GetUserList(Dictionary<string, string> paramList)
+        {
+            var res = new SingleRsp();
+            res.Data = userRep.GetUserList(paramList);
+
+            return res;
+        }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using QuanLyChiTieu04_NguyenBaoLong04.BLL;
+using QuanLyChiTieu04_NguyenBaoLong04.Common;
 using QuanLyChiTieu04_NguyenBaoLong04.Common.Reg;
 using QuanLyChiTieu04_NguyenBaoLong04.Common.Rsp;
 using QuanLyChiTieu04_NguyenBaoLong04.DAL.Models;
+using System.Collections.Generic;
 
 namespace QuanLyChiTieu04_NguyenBaoLong04.Web.Controllers
 {
@@ -43,6 +45,20 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.Web.Controllers
         public IActionResult UpdateUser([FromBody] User user)
         {
             var res = userSvc.UpdateUser(user);
+            return Ok(res);
+        }
+
+        [HttpPost("/user/get-user-list")]
+        public IActionResult GetUserList([FromBody] SearchUserReq user,
+             [FromQuery(Name = "page")] string page,
+             [FromQuery(Name = "pageSize")] string pageSize)
+        {
+            Dictionary<string, string> paramList = new Dictionary<string, string>();
+            paramList.Add("username", user.Username);
+            paramList.Add("page", page);
+            paramList.Add("pageSize", pageSize);
+
+            var res = userSvc.GetUserList(paramList);
             return Ok(res);
         }
     }

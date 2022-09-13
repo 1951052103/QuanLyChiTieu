@@ -119,5 +119,34 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.DAL
             }
             return res;
         }
+
+        public List<User> GetUserList(Dictionary<string, string> paramList)
+        {
+            var res = All;
+
+            string username = paramList["username"];
+            if (!string.IsNullOrEmpty(username))
+            {
+                res = res.Where(u => u.Username.Contains(username));
+            }
+
+            try
+            {
+                int pageSize = Int32.Parse(string.IsNullOrEmpty(paramList["pageSize"]) ? "0" : paramList["pageSize"]);
+                int page = Int32.Parse(string.IsNullOrEmpty(paramList["page"]) ? "1" : paramList["page"]);
+
+                if (pageSize > 0)
+                {
+                    int offset = (page - 1) * pageSize;
+                    return res.Skip(offset).Take(pageSize).ToList();
+                }
+            }
+            catch
+            {
+                return null;
+            }
+
+            return res.ToList();
+        }
     }
 }
