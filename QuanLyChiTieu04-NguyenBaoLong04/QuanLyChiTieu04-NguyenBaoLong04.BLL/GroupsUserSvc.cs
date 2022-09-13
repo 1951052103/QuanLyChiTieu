@@ -16,17 +16,17 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.BLL
             groupsUserRep = new GroupsUserRep();
         }
 
-        public override SingleRsp Delete(int id)
+        public SingleRsp DeleteGroupUserById(int id)
         {
             var res = new SingleRsp();
-            res.Data = _rep.Delete(id);
+            res.Data = _rep.DeleteGroupUserById(id);
             return res;
         }
 
-        public SingleRsp Add(GroupsUser item)
+        public SingleRsp JoinGroup(GroupsUser item)
         {
             var res = new SingleRsp();
-            res = groupsUserRep.Add(item);
+            res = groupsUserRep.JoinGroup(item);
             return res;
         }
     }

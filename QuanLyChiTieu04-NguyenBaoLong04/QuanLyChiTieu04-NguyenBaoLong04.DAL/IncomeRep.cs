@@ -39,5 +39,26 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.DAL
 
             return res.ToList();
         }
+
+        public decimal GetTotalIncomeByMonth(Dictionary<string, string> paramList)
+        {
+            try
+            {
+                int userId = Int32.Parse(paramList["userId"]);
+                int month = Int32.Parse(paramList["month"]);
+
+                var res = All.Where(e => e.Active == true)
+                    .Where(e => e.IsIncome == true)
+                    .Where(e => e.UserId == userId)
+                    .Where(e => e.Date.Value.Month == month)
+                    .Select(e => e.Amount).Sum();
+
+                return (decimal)res;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
     }
 }

@@ -31,5 +31,18 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.BLL
             return res;
 
         }
+
+        public SingleRsp Login(UserReq userReq)
+        {
+            var res = new SingleRsp();
+
+            User u = new User();
+            u.Username = userReq.Username;
+            u.Pass = userReq.Pass;
+
+            res.Data = userRep.Login(u);
+            return res;
+
+        }
     }
 }

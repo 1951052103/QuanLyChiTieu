@@ -63,5 +63,21 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.DAL
             }
             return res;
         }
+
+        public User Login(User item)
+        {
+
+            try
+            {
+                var res = All.Where(u => u.Username == item.Username)
+                        .Where(u => u.Pass == item.Pass);
+
+                return res.ToList()[0];
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
     }
 }

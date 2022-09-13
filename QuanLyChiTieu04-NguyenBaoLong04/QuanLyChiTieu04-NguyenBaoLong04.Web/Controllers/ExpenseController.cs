@@ -19,7 +19,7 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.Web.Controllers
         [HttpGet("/expense/{userId}")]
         public IActionResult GetIncomeByUserId(int userId,
              [FromQuery(Name = "date")] string date,
-             [FromQuery(Name = "reason")] string reason) //[FromBody] SimpleReq simpleReq
+             [FromQuery(Name = "reason")] string reason)
         {
             Dictionary<string, string> paramList = new Dictionary<string, string>();
             paramList.Add("userId", userId.ToString());
@@ -28,6 +28,19 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.Web.Controllers
 
             var res = new SingleRsp();
             res = expenseSvc.Get(paramList);
+            return Ok(res);
+        }
+
+        [HttpGet("/expense/{userId}/get-total-expense-by-month/")]
+        public IActionResult GetTotalExpenseByMonth(int userId,
+             [FromQuery(Name = "month")] string month)
+        {
+            Dictionary<string, string> paramList = new Dictionary<string, string>();
+            paramList.Add("userId", userId.ToString());
+            paramList.Add("month", month);
+            
+            var res = new SingleRsp();
+            res = expenseSvc.GetTotalExpenseByMonth(paramList);
             return Ok(res);
         }
     }

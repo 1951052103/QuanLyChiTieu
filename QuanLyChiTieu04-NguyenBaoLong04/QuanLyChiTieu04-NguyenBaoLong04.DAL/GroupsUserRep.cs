@@ -15,7 +15,7 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.DAL
 
         }
 
-        public SingleRsp Delete(int id)
+        public SingleRsp DeleteGroupUserById(int id)
         {
             var res = new SingleRsp();
 
@@ -41,7 +41,7 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.DAL
             return res;
         }
 
-        public SingleRsp Add(GroupsUser item)
+        public SingleRsp JoinGroup(GroupsUser item)
         {
             var res = new SingleRsp();
             using (var context = new QuanLyChiTieuContext())

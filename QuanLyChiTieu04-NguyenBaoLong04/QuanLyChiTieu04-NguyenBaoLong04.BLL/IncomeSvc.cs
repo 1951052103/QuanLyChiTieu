@@ -22,5 +22,12 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.BLL
             res.Data = _rep.Get(paramList);
             return res;
         }
+
+        public SingleRsp GetTotalIncomeByMonth(Dictionary<string, string> paramList)
+        {
+            var res = new SingleRsp();
+            res.Data = _rep.GetTotalIncomeByMonth(paramList);
+            return res;
+        }
     }
 }

@@ -31,5 +31,12 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.Web.Controllers
             var res = userSvc.Add(item);
             return Ok(res);
         }
+
+        [HttpPost("/user/login")]
+        public IActionResult Login([FromBody] UserReq userReq)
+        {
+            var res = userSvc.Login(userReq);
+            return Ok(res);
+        }
     }
 }

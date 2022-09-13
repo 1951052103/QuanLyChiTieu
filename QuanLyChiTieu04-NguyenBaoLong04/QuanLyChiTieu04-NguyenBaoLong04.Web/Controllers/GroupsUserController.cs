@@ -20,14 +20,14 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.Web.Controllers
         public IActionResult DeleteGroupUserById(int id)
         {
             var res = new SingleRsp();
-            res = groupsUserSvc.Delete(id);
+            res = groupsUserSvc.DeleteGroupUserById(id);
             return Ok(res);
         }
 
-        [HttpPost("/group-user/add")]
-        public IActionResult Add([FromBody] GroupsUser item)
+        [HttpPost("/group-user/join-group")]
+        public IActionResult JoinGroup([FromBody] GroupsUser item)
         {
-            var res = groupsUserSvc.Add(item);
+            var res = groupsUserSvc.JoinGroup(item);
             return Ok(res);
         }
     }

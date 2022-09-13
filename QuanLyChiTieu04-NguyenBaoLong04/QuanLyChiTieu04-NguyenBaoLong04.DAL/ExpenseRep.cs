@@ -1,4 +1,5 @@
 ﻿using QuanLyChiTieu04_NguyenBaoLong04.Common.DAL;
+using QuanLyChiTieu04_NguyenBaoLong04.Common.Rsp;
 using QuanLyChiTieu04_NguyenBaoLong04.DAL.Models;
 using System;
 using System.Collections.Generic;
@@ -37,6 +38,27 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.DAL
             }
 
             return res.ToList();
+        }
+
+        public decimal GetTotalExpenseByMonth(Dictionary<string, string> paramList)
+        {
+            try
+            {
+                int userId = Int32.Parse(paramList["userId"]);
+                int month = Int32.Parse(paramList["month"]);
+
+                var res = All.Where(e => e.Active == true)
+                    .Where(e => e.IsIncome == false)
+                    .Where(e => e.UserId == userId)
+                    .Where(e => e.Date.Value.Month == month)
+                    .Select(e => e.Amount).Sum();
+
+                return (decimal)res;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
         }
     }
 }
