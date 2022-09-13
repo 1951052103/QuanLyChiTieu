@@ -1,21 +1,21 @@
 ﻿using QuanLyChiTieu04_NguyenBaoLong04.Common.DAL;
+using QuanLyChiTieu04_NguyenBaoLong04.Common.Rsp;
 using QuanLyChiTieu04_NguyenBaoLong04.DAL.Models;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-using QuanLyChiTieu04_NguyenBaoLong04.Common.Rsp;
+using System.Text;
 
 namespace QuanLyChiTieu04_NguyenBaoLong04.DAL
 {
-    public class IncomeAndExpenseRep : GenericRep<QuanLyChiTieuContext, IncomeAndExpense>
+    public class GroupRep : GenericRep<QuanLyChiTieuContext, Group>
     {
-        public IncomeAndExpenseRep()
+        public GroupRep()
         {
 
         }
 
-        public SingleRsp DeleteIncomeAndExpenseById(int id)
+        public SingleRsp Delete(int id)
         {
             var res = new SingleRsp();
 
@@ -26,7 +26,7 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.DAL
                     try
                     {
                         var item = base.All.FirstOrDefault(i => i.Id == id);
-                        context.IncomeAndExpenses.Remove(item);
+                        context.Groups.Remove(item);
                         context.SaveChanges();
                         tran.Commit();
                     }
@@ -41,7 +41,7 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.DAL
             return res;
         }
 
-        public SingleRsp AddIncomeAndExpense(IncomeAndExpense item)
+        public SingleRsp Add(Group item)
         {
             var res = new SingleRsp();
             using (var context = new QuanLyChiTieuContext())
@@ -50,33 +50,9 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.DAL
                 {
                     try
                     {
-                        context.IncomeAndExpenses.Add(item);
+                        context.Groups.Add(item);
                         context.SaveChanges();
                         tran.Commit();
-                    }
-                    catch (Exception ex)
-                    {
-                        tran.Rollback();
-                        res.SetError(ex.StackTrace);
-                    }
-                }
-            }
-            return res;
-        }
-        
-        public SingleRsp UpdateIncomeAndExpense(IncomeAndExpense item)
-        {
-            var res = new SingleRsp();
-            using (var context = new QuanLyChiTieuContext())
-            {
-                using (var tran = context.Database.BeginTransaction())
-                {
-                    try
-                    {
-                        context.IncomeAndExpenses.Update(item);
-                        context.SaveChanges();
-                        tran.Commit();
-                        
                     }
                     catch (Exception ex)
                     {

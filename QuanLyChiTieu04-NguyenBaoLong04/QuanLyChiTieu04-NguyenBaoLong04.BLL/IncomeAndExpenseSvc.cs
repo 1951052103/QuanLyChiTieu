@@ -17,29 +17,30 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.BLL
             incomeAndExpenseRep = new IncomeAndExpenseRep();
         }
 
-        public override SingleRsp Delete(int id)
+        public SingleRsp DeleteIncomeAndExpenseById(int id)
         {
             var res = new SingleRsp();
-            res.Data = _rep.Delete(id);
+            res.Data = _rep.DeleteIncomeAndExpenseById(id);
             return res;
         }
 
-        public SingleRsp Add(IncomeAndExpenseReq itemReq)
+        public SingleRsp AddIncomeAndExpense(IncomeAndExpense item)
         {
             var res = new SingleRsp();
-            IncomeAndExpense item = new IncomeAndExpense();
-            item.UserId = itemReq.UserId;
-            item.GroupId = itemReq.GroupId;
-            item.Amount = itemReq.Amount;
-            item.Reason = itemReq.Reason;
-            item.Detail = itemReq.Detail;
-            item.Date = itemReq.Date;
-            item.IsIncome = itemReq.IsIncome;
-            item.Approved = itemReq.Approved;
-            item.Confirmed = itemReq.Confirmed;
-            item.Active = itemReq.Active;
+            item.UserId = item.UserId > 0 ? item.UserId : null;
+            item.GroupId = item.GroupId > 0 ? item.GroupId : null;
+            res = incomeAndExpenseRep.AddIncomeAndExpense(item);
 
-            res = incomeAndExpenseRep.Add(item);
+            return res;
+        }
+
+        public SingleRsp UpdateIncomeAndExpense(IncomeAndExpense item)
+        {
+            var res = new SingleRsp();
+            item.UserId = item.UserId > 0 ? item.UserId : null;
+            item.GroupId = item.GroupId > 0 ? item.GroupId : null;
+            res = incomeAndExpenseRep.UpdateIncomeAndExpense(item);
+
             return res;
         }
     }

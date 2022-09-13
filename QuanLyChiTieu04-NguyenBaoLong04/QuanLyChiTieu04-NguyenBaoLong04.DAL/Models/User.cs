@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 #nullable disable
 
@@ -20,7 +21,9 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.DAL.Models
         public string LastName { get; set; }
         public bool? Active { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<GroupsUser> GroupsUsers { get; set; }
+        [JsonIgnore]
         public virtual ICollection<IncomeAndExpense> IncomeAndExpenses { get; set; }
     }
 }

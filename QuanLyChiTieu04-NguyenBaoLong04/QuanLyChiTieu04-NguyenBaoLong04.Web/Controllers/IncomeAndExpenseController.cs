@@ -4,6 +4,7 @@ using QuanLyChiTieu04_NguyenBaoLong04.BLL;
 using QuanLyChiTieu04_NguyenBaoLong04.Common.Reg;
 using QuanLyChiTieu04_NguyenBaoLong04.Common.Rsp;
 using QuanLyChiTieu04_NguyenBaoLong04.DAL.Models;
+using System;
 using System.Collections.Generic;
 
 namespace QuanLyChiTieu04_NguyenBaoLong04.Web.Controllers
@@ -19,17 +20,25 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.Web.Controllers
         }
 
         [HttpDelete("/income-and-expense/delete/{id}")]
-        public IActionResult DeleteIncomeById(int id)
+        public IActionResult DeleteIncomeAndExpenseById(int id)
         {
             var res = new SingleRsp();
-            res = incomeAndExpenseSvc.Delete(id);
+            res = incomeAndExpenseSvc.DeleteIncomeAndExpenseById(id);
             return Ok(res);
         }
 
         [HttpPost("/income-and-expense/add")]
-        public IActionResult AddIncome([FromBody] IncomeAndExpenseReq itemReq)
+        public IActionResult AddIncomeAndExpense([FromBody] IncomeAndExpense item)
         {
-            var res = incomeAndExpenseSvc.Add(itemReq);
+            var res = incomeAndExpenseSvc.AddIncomeAndExpense(item);
+            return Ok(res);
+        }
+
+        [HttpPut("/income-and-expense/update")]
+        public IActionResult UpdateIncomeAndExpense([FromBody] IncomeAndExpense item)
+        {
+            var res = incomeAndExpenseSvc.UpdateIncomeAndExpense(item);
+            
             return Ok(res);
         }
     }
