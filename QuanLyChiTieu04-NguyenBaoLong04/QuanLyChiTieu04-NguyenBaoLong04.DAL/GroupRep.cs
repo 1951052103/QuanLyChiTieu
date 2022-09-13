@@ -15,6 +15,35 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.DAL
 
         }
 
+        public override List<Group> Get(Dictionary<string, string> paramList)
+        {
+            var res = All.Where(g => g.Active == true);
+
+            string name = paramList["name"];
+            if (!string.IsNullOrEmpty(name))
+            {
+                res = res.Where(g => g.GroupName.Contains(name));
+            }
+
+            try
+            {
+                int pageSize = Int32.Parse(string.IsNullOrEmpty(paramList["pageSize"]) ? "0" : paramList["pageSize"]);
+                int page = Int32.Parse(string.IsNullOrEmpty(paramList["page"]) ? "1" : paramList["page"]);
+
+                if (pageSize > 0)
+                {
+                    int offset = (page - 1) * pageSize;
+                    return res.Skip(offset).Take(pageSize).ToList();
+                }
+            }
+            catch
+            {
+                return null;
+            }
+
+            return res.ToList();
+        }
+
         public SingleRsp Delete(int id)
         {
             var res = new SingleRsp();

@@ -37,6 +37,22 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.DAL
                 res = res.Where(e => e.Reason.Contains(reason));
             }
 
+            try
+            {
+                int pageSize = Int32.Parse(string.IsNullOrEmpty(paramList["pageSize"]) ? "0" : paramList["pageSize"]);
+                int page = Int32.Parse(string.IsNullOrEmpty(paramList["page"]) ? "1" : paramList["page"]);
+
+                if (pageSize > 0)
+                {
+                    int offset = (page - 1) * pageSize;
+                    return res.Skip(offset).Take(pageSize).ToList();
+                }
+            }
+            catch
+            {
+                return null;
+            }
+
             return res.ToList();
         }
 

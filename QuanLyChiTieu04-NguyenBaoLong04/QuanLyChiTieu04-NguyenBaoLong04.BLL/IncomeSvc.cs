@@ -4,6 +4,7 @@ using QuanLyChiTieu04_NguyenBaoLong04.DAL;
 using QuanLyChiTieu04_NguyenBaoLong04.DAL.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace QuanLyChiTieu04_NguyenBaoLong04.BLL

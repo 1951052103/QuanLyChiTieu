@@ -22,12 +22,16 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.Web.Controllers
         [HttpGet("/income/{userId}")]
         public IActionResult GetIncomeByUserId(int userId,
              [FromQuery(Name = "date")] string date,
-             [FromQuery(Name = "reason")] string reason) //[FromBody] SimpleReq simpleReq
+             [FromQuery(Name = "reason")] string reason,
+             [FromQuery(Name = "page")] string page,
+             [FromQuery(Name = "pageSize")] string pageSize)
         {
             Dictionary<string, string> paramList = new Dictionary<string, string>();
             paramList.Add("userId", userId.ToString());
             paramList.Add("date", date);
             paramList.Add("reason", reason);
+            paramList.Add("page", page);
+            paramList.Add("pageSize", pageSize);
 
             var res = new SingleRsp();
             res = incomeSvc.Get(paramList);

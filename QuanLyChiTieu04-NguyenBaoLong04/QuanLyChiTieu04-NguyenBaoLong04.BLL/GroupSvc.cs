@@ -16,6 +16,13 @@ namespace QuanLyChiTieu04_NguyenBaoLong04.BLL
             groupRep = new GroupRep();
         }
 
+        public override SingleRsp Get(Dictionary<string, string> paramList)
+        {
+            var res = new SingleRsp();
+            res.Data = _rep.Get(paramList);
+            return res;
+        }
+
         public override SingleRsp Delete(int id)
         {
             var res = new SingleRsp();
